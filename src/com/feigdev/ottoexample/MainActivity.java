@@ -1,6 +1,7 @@
 package com.feigdev.ottoexample;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
@@ -9,12 +10,15 @@ import android.widget.Button;
 
 public class MainActivity extends Activity {
 	private static final String TAG = "MainActivity";
+	
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+		startService(new Intent(this, ButtonSubscriber.class));
+
+		// Register self with the only bus that we're using
 		BusProvider.getInstance().register(this);
-		ButtonSubscriber.getInstance();
 		
         ((Button)findViewById(R.id.button1)).setOnClickListener(new OnClickListener() {
 			
@@ -32,5 +36,12 @@ public class MainActivity extends Activity {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main, menu);
         return true;
+    }
+
+    @Override
+    public void onDestroy(){
+    	// Let's kill the service with a bus message when we kill the activity
+    	BusProvider.getInstance().post(new KillService());
+    	super.onDestroy();
     }
 }

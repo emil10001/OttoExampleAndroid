@@ -5,15 +5,19 @@ import android.util.Log;
 import com.squareup.otto.Subscribe;
 
 public class ButtonSubscriber {
-	private static final String TAG = "ButtonSubscriber";
+	static final String TAG = "ButtonSubscriber";
 	private static final ButtonSubscriber instance = new ButtonSubscriber();
 	
 	private ButtonSubscriber(){
 		BusProvider.getInstance().register(this);
 	}
 	
+	static ButtonSubscriber getInstance(){
+		return instance;
+	}
+	
 	@Subscribe
-	void printButtonPress(ButtonEvent event){
+	public void printButtonPress(ButtonEvent event){
 		Log.d(TAG,"button pressed");
 	}
 }

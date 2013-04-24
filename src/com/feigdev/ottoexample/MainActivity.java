@@ -37,7 +37,7 @@ public class MainActivity extends Activity {
 	// Two separate subscribers to the button event.
 	@Subscribe
 	public void anotherButtonPress(ButtonEvent event) {
-		Toast.makeText(this, "Activity called", 1000).show();
+		Toast.makeText(this, "Activity called", Toast.LENGTH_SHORT).show();
 	}
 
 	@Override

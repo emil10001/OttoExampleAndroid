@@ -27,7 +27,7 @@ public class ButtonSubscriber extends Service {
 	// Two separate subscribers to the button event.
 	@Subscribe
 	public void printButtonPress(ButtonEvent event) {
-		Toast.makeText(this, "Service called", 1000).show();
+		Toast.makeText(this, "Service called", Toast.LENGTH_SHORT).show();
 	}
 
 	// Use bus to kill the service

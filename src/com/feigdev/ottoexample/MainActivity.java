@@ -1,5 +1,7 @@
 package com.feigdev.ottoexample;
 
+import com.squareup.otto.Subscribe;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -7,6 +9,7 @@ import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.Toast;
 
 public class MainActivity extends Activity {
 	private static final String TAG = "MainActivity";
@@ -30,6 +33,11 @@ public class MainActivity extends Activity {
         
     }
 
+    // Two separate subscribers to the button event.
+	@Subscribe
+	public void anotherButtonPress(ButtonEvent event){
+		Toast.makeText(this, "Activity called", 1000).show();
+	}
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

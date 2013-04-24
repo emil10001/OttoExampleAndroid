@@ -4,6 +4,7 @@ import android.app.Service;
 import android.content.Intent;
 import android.os.IBinder;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.squareup.otto.Subscribe;
 
@@ -23,11 +24,13 @@ public class ButtonSubscriber extends Service {
 		super.onDestroy();
 	}
 
+    // Two separate subscribers to the button event.
 	@Subscribe
 	public void printButtonPress(ButtonEvent event){
-		Log.d(TAG,"button pressed");
+		Toast.makeText(this, "Service called", 1000).show();
 	}
 
+	// Use bus to kill the service
 	@Subscribe
 	public void killSerivce(KillService event){
 		onDestroy();
